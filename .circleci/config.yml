@@ -6,6 +6,7 @@ jobs:
     docker:
       - image: node:19-alpine3.15
     steps:
+      - checkout # git clone <my repo>
       - run:
           name: "Build the service"
           command: |
