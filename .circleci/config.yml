@@ -15,6 +15,10 @@ jobs:
             ls
             npm install
             npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - calculator/node_modules
 
 
 
@@ -23,13 +27,13 @@ jobs:
       - image: node:19-alpine3.15
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - run:
           name: "Test the service"
           command: |
             cd calculator
-            npm install
-            npm run build
-            npm run test
+            ls
 
 
 workflows:
