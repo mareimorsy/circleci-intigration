@@ -13,24 +13,29 @@ jobs:
             cd calculator
             pwd
             ls
+            npm install
             npm run build
 
 
 
-  # test:
-  #   docker:
-  #     - image: alpine:latest
-  #   steps:
-  #     - run:
-  #         name: "Build the service"
-  #         command: |
-  #           apk add ansible gzip openssh-client
+  test:
+    docker:
+      - image: node:19-alpine3.15
+    steps:
+      - checkout
+      - run:
+          name: "Test the service"
+          command: |
+            cd calculator
+            npm install
+            npm run build
+            npm run test
 
 
 workflows:
   welcome:
     jobs:
       - build
-      # - test:
-      #     requires:
-      #       - build
+      - test:
+          requires:
+            - build
