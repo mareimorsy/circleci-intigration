@@ -10,6 +10,9 @@ jobs:
       - run:
           name: "Build the service"
           command: |
+            cd calculator
+            pwd
+            ls
             npm run build
 
 
