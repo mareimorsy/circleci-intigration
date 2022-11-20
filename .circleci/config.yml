@@ -2,24 +2,31 @@ version: 2.1
 
 jobs:
 
-  print_hello:
+  build:
     docker:
-      - image: alpine:latest
+      - image: node:19-alpine3.15
     steps:
-      - run: echo hello
+      - run:
+          name: "Build the service"
+          command: |
+            npm run build
 
 
 
-  print_world:
-    docker:
-      - image: alpine:latest
-    steps:
-      - run: echo world
+  # test:
+  #   docker:
+  #     - image: alpine:latest
+  #   steps:
+  #     - run:
+  #         name: "Build the service"
+  #         command: |
+  #           apk add ansible gzip openssh-client
+
 
 workflows:
   welcome:
     jobs:
-      - print_hello
-      - print_world:
-          requires:
-            - print_hello
+      - build
+      # - test:
+      #     requires:
+      #       - build
