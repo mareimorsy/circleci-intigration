@@ -27,13 +27,13 @@ jobs:
       - image: node:19-alpine3.15
     steps:
       - checkout
-      # - attach_workspace:
-      #     at: .
+      - attach_workspace:
+          at: .
       - run:
           name: "Test the service"
           command: |
             cd calculator
-            ls
+            npm run test
 
 
 workflows:
